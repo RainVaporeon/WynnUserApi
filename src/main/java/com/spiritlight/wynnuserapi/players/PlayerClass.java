@@ -23,8 +23,6 @@ public class PlayerClass {
     private Map<String, Integer> stats;
     private List<String> completedQuests;
 
-
-
     public boolean isHardcore() {
         return hardcore;
     }
@@ -77,6 +75,10 @@ public class PlayerClass {
         return name;
     }
 
+    /**
+     * It's recommended that one uses {@link com.spiritlight.wynnuserapi.utils.Dungeon} and {@link com.spiritlight.wynnuserapi.utils.Raid} for sake of compatibility
+     * @return The stat map of this class.
+     */
     public Map<String, Integer> getStats() {
         return stats;
     }

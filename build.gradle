@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.spiritlight.wynnuserapi'
-version '1.0-SNAPSHOT'
+version '1.0-SNAPSHOT-NoDependencies'
 
 repositories {
     mavenCentral()
@@ -23,8 +23,10 @@ jar {
     manifest {
         attributes "Main-Class": "com.spiritlight.wynnuserapi.Main"
     }
+    /*
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from configurations.runtimeClasspath.asFileTree.files.collect {
         zipTree(it)
     }
+    */
 }
