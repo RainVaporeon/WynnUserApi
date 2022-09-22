@@ -75,6 +75,17 @@ public class Call {
                 JsonObject o = element.getAsJsonObject();
                 completionMap.put(o.get("name").getAsString(), o.get("completed").getAsInt());
             }
+            JsonArray questCompletions = classBase.getAsJsonObject("quests").getAsJsonArray("list");
+            List<String> completedQuests = new ArrayList<>();
+            for(JsonElement element : questCompletions) {
+                completedQuests.add(element.getAsString());
+            }
+            pc.setCompletedQuests(completedQuests);
+            JsonObject gamemode = classBase.getAsJsonObject("gamemode");
+            pc.setIronman(gamemode.get("ironman").getAsBoolean());
+            pc.setHardcore(gamemode.get("hardcore").getAsBoolean());
+            pc.setHunted(gamemode.get("hunted").getAsBoolean());
+            pc.setCraftsman(gamemode.get("craftsman").getAsBoolean());
             pc.setStats(completionMap);
             classes.add(pc);
         }

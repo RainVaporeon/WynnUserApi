@@ -2,6 +2,7 @@ package com.spiritlight.wynnuserapi.players;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * An object representing a player's class info.
@@ -145,5 +146,18 @@ public class PlayerClass {
 
     public void setCompletedQuests(List<String> completedQuests) {
         this.completedQuests = completedQuests;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerClass that = (PlayerClass) o;
+        return hardcore == that.hardcore && ironman == that.ironman && craftsman == that.craftsman && hunted == that.hunted && level == that.level && totalLevel == that.totalLevel && mobsKilled == that.mobsKilled && discoveries == that.discoveries && loginCount == that.loginCount && deathCount == that.deathCount && playTime == that.playTime && blocksWalked == that.blocksWalked && name.equals(that.name) && stats.equals(that.stats) && completedQuests.equals(that.completedQuests);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hardcore, ironman, craftsman, hunted, level, totalLevel, mobsKilled, discoveries, loginCount, deathCount, playTime, blocksWalked, name, stats, completedQuests);
     }
 }

@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -135,5 +136,18 @@ public class Player {
 
     public void setJson(JsonObject json) {
         this.json = json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return totalDiscoveries == player.totalDiscoveries && mobsKilled == player.mobsKilled && blocksWalked == player.blocksWalked && isOnline == player.isOnline && rank == player.rank && uuid.equals(player.uuid) && username.equals(player.username) && firstJoin.equals(player.firstJoin) && lastJoin.equals(player.lastJoin) && playerClasses.equals(player.playerClasses) && json.equals(player.json) && Objects.equals(world, player.world);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rank, uuid, username, firstJoin, lastJoin, totalDiscoveries, mobsKilled, blocksWalked, playerClasses, json, world, isOnline);
     }
 }
