@@ -143,11 +143,29 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return totalDiscoveries == player.totalDiscoveries && mobsKilled == player.mobsKilled && blocksWalked == player.blocksWalked && isOnline == player.isOnline && rank == player.rank && uuid.equals(player.uuid) && username.equals(player.username) && firstJoin.equals(player.firstJoin) && lastJoin.equals(player.lastJoin) && playerClasses.equals(player.playerClasses) && json.equals(player.json) && Objects.equals(world, player.world);
+        return totalDiscoveries == player.totalDiscoveries && mobsKilled == player.mobsKilled && blocksWalked == player.blocksWalked && isOnline == player.isOnline && rank == player.rank && uuid.equals(player.uuid) && username.equals(player.username) && firstJoin.equals(player.firstJoin) && lastJoin.equals(player.lastJoin) && playerClasses.equals(player.playerClasses) && json.equals(player.json) && world.equals(player.world);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(rank, uuid, username, firstJoin, lastJoin, totalDiscoveries, mobsKilled, blocksWalked, playerClasses, json, world, isOnline);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "rank=" + rank +
+                ", uuid=" + uuid +
+                ", username='" + username + '\'' +
+                ", firstJoin=" + firstJoin +
+                ", lastJoin=" + lastJoin +
+                ", totalDiscoveries=" + totalDiscoveries +
+                ", mobsKilled=" + mobsKilled +
+                ", blocksWalked=" + blocksWalked +
+                ", playerClasses=" + playerClasses +
+                ", json=" + json +
+                ", world='" + world + '\'' +
+                ", isOnline=" + isOnline +
+                '}';
     }
 }

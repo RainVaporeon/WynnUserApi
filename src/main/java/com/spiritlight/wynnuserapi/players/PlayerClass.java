@@ -1,5 +1,7 @@
 package com.spiritlight.wynnuserapi.players;
 
+import com.spiritlight.wynnuserapi.utils.Professions;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -23,6 +25,15 @@ public class PlayerClass {
     private String name;
     private Map<String, Integer> stats;
     private List<String> completedQuests;
+    private Professions professions;
+
+    public Professions getProfessions() {
+        return professions;
+    }
+
+    public void setProfessions(Professions professions) {
+        this.professions = professions;
+    }
 
     public boolean isHardcore() {
         return hardcore;
@@ -104,6 +115,8 @@ public class PlayerClass {
         this.hunted = hunted;
     }
 
+
+
     public void setLevel(int level) {
         this.level = level;
     }
@@ -149,11 +162,33 @@ public class PlayerClass {
     }
 
     @Override
+    public String toString() {
+        return "PlayerClass{" +
+                "hardcore=" + hardcore +
+                ", ironman=" + ironman +
+                ", craftsman=" + craftsman +
+                ", hunted=" + hunted +
+                ", level=" + level +
+                ", totalLevel=" + totalLevel +
+                ", mobsKilled=" + mobsKilled +
+                ", discoveries=" + discoveries +
+                ", loginCount=" + loginCount +
+                ", deathCount=" + deathCount +
+                ", playTime=" + playTime +
+                ", blocksWalked=" + blocksWalked +
+                ", name='" + name + '\'' +
+                ", stats=" + stats +
+                ", completedQuests=" + completedQuests +
+                ", professions=" + professions +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerClass that = (PlayerClass) o;
-        return hardcore == that.hardcore && ironman == that.ironman && craftsman == that.craftsman && hunted == that.hunted && level == that.level && totalLevel == that.totalLevel && mobsKilled == that.mobsKilled && discoveries == that.discoveries && loginCount == that.loginCount && deathCount == that.deathCount && playTime == that.playTime && blocksWalked == that.blocksWalked && name.equals(that.name) && stats.equals(that.stats) && completedQuests.equals(that.completedQuests);
+        return hardcore == that.hardcore && ironman == that.ironman && craftsman == that.craftsman && hunted == that.hunted && level == that.level && totalLevel == that.totalLevel && mobsKilled == that.mobsKilled && discoveries == that.discoveries && loginCount == that.loginCount && deathCount == that.deathCount && playTime == that.playTime && blocksWalked == that.blocksWalked && name.equals(that.name) && stats.equals(that.stats) && completedQuests.equals(that.completedQuests) && professions.equals(that.professions);
     }
 
     @Override

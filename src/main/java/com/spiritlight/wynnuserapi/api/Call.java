@@ -7,6 +7,7 @@ import com.spiritlight.wynnuserapi.connections.RatelimitException;
 import com.spiritlight.wynnuserapi.players.Player;
 import com.spiritlight.wynnuserapi.players.PlayerClass;
 import com.spiritlight.wynnuserapi.utils.Converter;
+import com.spiritlight.wynnuserapi.utils.Professions;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nullable;
@@ -34,7 +35,12 @@ public class Call {
         String parse = response.getBody();
         JsonObject jsonObject = new Gson().fromJson(parse, JsonObject.class);
         if(jsonObject == null) return null;
-        JsonObject dataEntry = jsonObject.get("data").getAsJsonArray().get(0).getAsJsonObject();
+        JsonObject dataEntry;
+        try {
+            dataEntry = jsonObject.get("data").getAsJsonArray().get(0).getAsJsonObject();
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoFieldFoundException(e.getMessage(), jsonObject);
+        }
         JsonObject metaEntry = dataEntry.getAsJsonObject("meta");
         JsonObject locationEntry = metaEntry.get("location").getAsJsonObject();
         JsonObject globalEntry = dataEntry.getAsJsonObject("global");
@@ -58,6 +64,7 @@ public class Call {
             final PlayerClass pc = new PlayerClass();
             final Map<String,Integer> completionMap = new HashMap<>();
             pc.setName(classBase.get("name").getAsString());
+            pc.setLevel(classBase.get("professions").getAsJsonObject().get("combat").getAsJsonObject().get("level").getAsInt());
             pc.setTotalLevel(classBase.get("level").getAsInt());
             pc.setBlocksWalked(classBase.get("blocksWalked").getAsLong());
             pc.setMobsKilled(classBase.get("mobsKilled").getAsInt());
@@ -65,6 +72,7 @@ public class Call {
             pc.setDeathCount(classBase.get("deaths").getAsInt());
             pc.setPlayTime(classBase.get("playtime").getAsInt());
             pc.setDiscoveries(classBase.get("discoveries").getAsInt());
+            pc.setProfessions(Professions.fromJson(classBase.get("professions").getAsJsonObject()));
             JsonArray dungeonCompletions = classBase.getAsJsonObject("dungeons").getAsJsonArray("list");
             for(JsonElement element : dungeonCompletions) {
                 JsonObject o = element.getAsJsonObject();
